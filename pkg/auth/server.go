@@ -6,6 +6,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
 	"sync"
@@ -44,6 +45,8 @@ func (s *extAuthzServerV2) logRequest(allow string, request *authv2.CheckRequest
 // Check implements gRPC v2 check request.
 func (s *extAuthzServerV2) Check(ctx context.Context, checkRequest *authv2.CheckRequest) (*authv2.CheckResponse, error) {
 
+	s.logRequest("", checkRequest)
+
 	request := Request{}
 	request.FromV2(checkRequest)
 
@@ -51,13 +54,6 @@ func (s *extAuthzServerV2) Check(ctx context.Context, checkRequest *authv2.Check
 	if err != nil {
 		return nil, err
 	}
-
-	if response.Allow {
-		s.logRequest(resultAllowed, checkRequest)
-	} else {
-		s.logRequest(resultDenied, checkRequest)
-	}
-
 	return response.AsV2(), nil
 }
 
@@ -71,18 +67,14 @@ func (s *extAuthzServerV3) logRequest(allow string, request *authv3.CheckRequest
 // Check implements gRPC v3 check request.
 func (s *extAuthzServerV3) Check(ctx context.Context, checkRequest *authv3.CheckRequest) (*authv3.CheckResponse, error) {
 
+	s.logRequest("", checkRequest)
+
 	request := Request{}
 	request.FromV3(checkRequest)
 
 	response, err := s.checkService.Check(ctx, &request)
 	if err != nil {
 		return nil, err
-	}
-
-	if response.Allow {
-		s.logRequest(resultAllowed, checkRequest)
-	} else {
-		s.logRequest(resultDenied, checkRequest)
 	}
 
 	return response.AsV3(), nil
@@ -103,6 +95,7 @@ func (s *ExtAuthzServer) startGRPC(address string, wg *sync.WaitGroup) {
 	s.grpcPort <- listener.Addr().(*net.TCPAddr).Port
 
 	s.grpcServer = grpc.NewServer()
+	reflection.Register(s.grpcServer)
 	authv2.RegisterAuthorizationServer(s.grpcServer, s.grpcV2)
 	authv3.RegisterAuthorizationServer(s.grpcServer, s.grpcV3)
 

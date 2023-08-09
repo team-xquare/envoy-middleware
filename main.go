@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/rlaisqls/envoy-middleware-test/pkg/auth"
+	"github.com/xquare-team/envoy-middleware-test/pkg/auth"
 	"os"
 	"os/signal"
 	"syscall"

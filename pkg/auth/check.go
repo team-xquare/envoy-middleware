@@ -10,8 +10,8 @@ import (
 	"github.com/getsentry/sentry-go"
 	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"
-	"github.com/rlaisqls/envoy-middleware-test/pkg/errors"
-	"github.com/rlaisqls/envoy-middleware-test/pkg/jwt"
+	"github.com/xquare-team/envoy-middleware-test/pkg/errors"
+	"github.com/xquare-team/envoy-middleware-test/pkg/jwt"
 )
 
 type CheckService interface {

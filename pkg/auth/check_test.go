@@ -10,8 +10,8 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/rlaisqls/envoy-middleware-test/pkg/errors"
-	"github.com/rlaisqls/envoy-middleware-test/pkg/jwt"
+	"github.com/xquare-team/envoy-middleware-test/pkg/errors"
+	"github.com/xquare-team/envoy-middleware-test/pkg/jwt"
 )
 
 func prepareCheckService() CheckService {
@@ -212,7 +212,7 @@ func TestCheckWithCookieToken(t *testing.T) {
 		ID:      "100",
 		Context: map[string]string{"k1": "v1", "k2": "v2"},
 		Request: http.Request{
-			Header: http.Header{"User-Agent": {"Foo"}, "Cookie": {"accessToken="+ token}},
+			Header: http.Header{"User-Agent": {"Foo"}, "Cookie": {"accessToken=" + token}},
 			Method: "GET",
 			Proto:  "HTTP/1.1",
 			URL: &url.URL{

@@ -1,4 +1,4 @@
-module github.com/rlaisqls/envoy-middleware-test
+module github.com/xquare-team/envoy-middleware-test
 
 go 1.17
 
