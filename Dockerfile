@@ -19,7 +19,6 @@ WORKDIR /dist
 
 RUN cp /build/auth .
 
-
 FROM scratch
 
 COPY --from=builder /dist/auth .
@@ -29,5 +28,7 @@ ARG SENTRY_DS
 
 ENV JWT_SECRET ${JWT_SECRET}
 ENV SENTRY_DSN ${SENTRY_DSN}
+
+EXPOSE 9000
 
 ENTRYPOINT [ "./auth", "run" ]
