@@ -1,0 +1,4 @@
+config:
+  name: envoy-middleware
+  service_type: be
+  port: 9000
