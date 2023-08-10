@@ -26,5 +26,5 @@ jobs:
           xquare_role_arn: ${{ secrets.XQUARE_ROLE_ARN }}
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           buildargs: |
-            JWT_SECRET=${{ secrets.JWT_SECRET_PROD }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
             
