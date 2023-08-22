@@ -38,6 +38,10 @@ func (c *checkService) Check(ctx context.Context, request *Request) (*Response, 
 	var tokenString string
 	var tokenType string
 
+	if request.Request.Header.Get("X-Is-Not-Xquare-Auth") != "" {
+		return c.responseOKWithoutHeader(), nil
+	}
+
 	if c.isAvailableCookie(request) {
 		tokenString = c.getAccessTokenFromCookie(request)
 	} else {
