@@ -39,6 +39,10 @@ func (c *checkService) Check(ctx context.Context, request *Request) (*Response, 
 		return c.responseOKWithoutHeader(), nil
 	}
 	
+	if request.Request.Method == "OPTIONS" {
+		return c.responseOKWithoutHeader(), nil
+	}
+	
 	var tokenString string
 	var tokenType string
 
