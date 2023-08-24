@@ -24,7 +24,7 @@ jobs:
         with:
           environment: prod
           access_key: ${{ secrets.ACCESS_KEY }}
-          github_token: ${{ secrets.TEST_PAT }}
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           buildargs: |
             JWT_SECRET=${{ secrets.JWT_SECRET }}
             
