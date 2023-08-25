@@ -30,6 +30,14 @@ func NewCheckService(l *logrus.Logger) CheckService {
 
 func (c *checkService) Check(ctx context.Context, request *Request) (*Response, error) {
 
+        if request.Request.Header.Get("X-Not-Using-Xquare-Auth") != "" {
+		return c.responseOKWithoutHeader(), nil
+	}
+	
+	if request.Request.Method == "OPTIONS" {
+		return c.responseOKWithoutHeader(), nil
+	}
+	
 	var tokenString string
 	var tokenType string
 
