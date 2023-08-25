@@ -72,10 +72,10 @@ func (s *extAuthzServerV3) Check(ctx context.Context, checkRequest *authv3.Check
 
 	response, err := s.checkService.Check(ctx, &request)
 	if err != nil {
-		s.logRequest(resultAllowed, checkRequest)
+		s.logRequest(resultDenied, checkRequest)
 		return nil, err
 	}
-	s.logRequest(resultDenied, checkRequest)
+	s.logRequest(resultAllowed, checkRequest)
 	return response.AsV3(), nil
 }
 
