@@ -45,15 +45,15 @@ func (s *extAuthzServerV2) logRequest(allow string, request *authv2.CheckRequest
 // Check implements gRPC v2 check request.
 func (s *extAuthzServerV2) Check(ctx context.Context, checkRequest *authv2.CheckRequest) (*authv2.CheckResponse, error) {
 
-	s.logRequest("", checkRequest)
-
 	request := Request{}
 	request.FromV2(checkRequest)
 
 	response, err := s.checkService.Check(ctx, &request)
 	if err != nil {
+		s.logRequest(resultDenied, checkRequest)
 		return nil, err
 	}
+	s.logRequest(resultAllowed, checkRequest)
 	return response.AsV2(), nil
 }
 
@@ -67,16 +67,15 @@ func (s *extAuthzServerV3) logRequest(allow string, request *authv3.CheckRequest
 // Check implements gRPC v3 check request.
 func (s *extAuthzServerV3) Check(ctx context.Context, checkRequest *authv3.CheckRequest) (*authv3.CheckResponse, error) {
 
-	s.logRequest("", checkRequest)
-
 	request := Request{}
 	request.FromV3(checkRequest)
 
 	response, err := s.checkService.Check(ctx, &request)
 	if err != nil {
+		s.logRequest(resultAllowed, checkRequest)
 		return nil, err
 	}
-
+	s.logRequest(resultDenied, checkRequest)
 	return response.AsV3(), nil
 }
 

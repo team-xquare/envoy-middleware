@@ -29,11 +29,6 @@ func NewCheckService(l *logrus.Logger) CheckService {
 }
 
 func (c *checkService) Check(ctx context.Context, request *Request) (*Response, error) {
-	c.log.Infof("checking request host: %s, path:%s, id: %s",
-		request.Request.URL.Host,
-		request.Request.URL.Path,
-		request.ID,
-	)
 
 	var tokenString string
 	var tokenType string
@@ -148,7 +143,6 @@ func (c *checkService) responseInternelServerError(err error) *Response {
 }
 
 func (c *checkService) responseUnauthorizedError(err error) *Response {
-	c.log.Info(err, 401)
 	defer sentry.Flush(2 * time.Second)
 	sentry.CaptureException(err)
 	return &Response{
@@ -169,7 +163,7 @@ func (c *checkService) responseOKWithoutHeader() *Response {
 }
 
 func (c *checkService) responseOKWithHeader(header http.Header) *Response {
-	c.log.Info("response with header: ", header)
+
 	defer sentry.Flush(2 * time.Second)
 	sentry.CaptureMessage(fmt.Sprintf("response with header: %v", header))
 	response := &Response{

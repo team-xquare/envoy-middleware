@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="39ad2ddb-598a-4f5d-aab4-add86a378191" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/auth/check.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/auth/check.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/auth/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/auth/server.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,7 +16,7 @@
   </component>
   <component name="GOROOT" url="file:///usr/local/go" />
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/envoy" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
