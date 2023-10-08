@@ -41,11 +41,7 @@ func (c *checkService) Check(ctx context.Context, request *Request) (*Response, 
 	var tokenString string
 	var tokenType string
 
-	if request.Request.Header.Get("X-Is-Not-Xquare-Auth") != "" {
-		return c.responseOKWithoutHeader(), nil
-	}
-
-	if request.Request.Method == "OPTIONS" {
+	if request.Request.Header.Get("X-Is-Not-Xquare-Auth") != "" || request.Request.Method == "OPTIONS" {
 		return c.responseOKWithoutHeader(), nil
 	}
 
