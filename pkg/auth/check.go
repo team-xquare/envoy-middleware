@@ -66,7 +66,7 @@ func (c *checkService) Check(ctx context.Context, request *Request) (*Response, 
 	header, err := c.createHeaderFromJWTToken(tokenString)
 	if err != nil {
 		if _, ok := err.(*jwt.ValidationError); ok {
-			return c.responseUnauthorizedError(err), err
+			return c.responseOKWithoutHeader(), nil
 		}
 		return c.responseInternelServerError(err), err
 	}
