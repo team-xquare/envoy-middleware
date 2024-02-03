@@ -103,7 +103,7 @@ func (c *checkService) findNotAvailableHeader(request *Request) []string {
 }
 
 func (c *checkService) getTokenInfo(request *Request) (string, string) {
-	token := request.Request.Header.Get("Authorization")
+	token := request.Request.Header.Get("authorization")
 	splittedToken := strings.Split(token, " ")
 	if len(splittedToken) != 2 {
 		return "", ""
