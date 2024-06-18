@@ -91,7 +91,7 @@ func (c *checkService) getAccessTokenFromCookie(request *Request) string {
 }
 
 func (c *checkService) findNotAvailableHeader(request *Request) []string {
-	blackList := []string{"Request-User-Id", "Request-User-Role", "Request-User-Authorities"}
+	blackList := []string{"Request-User-Authorities"}
 	result := []string{}
 	for _, key := range blackList {
 		if len(request.Request.Header.Get(key)) != 0 {
